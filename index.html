@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="connect with creators">
+    <meta name="keywords" content="getmytym, getmytime, nikhilkilivayil, riyas">
+    <meta name="application-name" content="getmytime, getmytym">
+    <link rel="icon" type="image/x-icon" href="/img/fav.png">
+    <title>GetMyTym</title>
+    <link rel="stylesheet" href="/css/bootstrap.css" type="text/css">
+    <link rel="stylesheet" href="/css/home.css" type="text/css">
+
+    <style>
+    ul{
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+    }
+    ul li {
+    font-size: 14px;
+    padding: 10px 10px;
+    list-style: none;
+    border-top: 1px solid rgb(214, 214, 214);
+    }
+
+    .match {
+        font-weight: 600;
+        color: green;
+    }
+
+    @media only screen and (min-width: 600px) {
+    input#search {
+        width: 40vw;
+    }
+    }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <nav class="row pl-2 pt-2" style="margin-left: 0; margin-right:0;">
+            <h1 style="color: rgb(5, 5, 5);" class="nav-text ml-2">stargram.in</h1>
+            <a href="https://wa.me/+919778130583?text=I'm%20interested%20to%20know%20about%20GetMyTime" target="blank" class="ml-auto mr-3" style="color: #75B1FF;">Need Help?</a>
+        </nav>
+        <div class="row center-div" style="margin-left: 0;margin-right:0;">
+            <p class="main-text  mt-5 ">
+                <span class="min">15 mins</span>
+                <span class="talk-with">talk with the right</span><span class="person"> person can </span>
+                <span class="change">change your life</span>
+            </p>
+        </div>
+        <div class="row mt-5"style="margin-left: 0;margin-right:0">
+            <p class="change1 mx-auto">Launching Soon...</p>
+        </div>
+        <div class="row" style="margin-left: 0;margin-right:0;padding: 1rem;">
+            <div class="m-2 mt-5 mx-auto button-row">
+                
+                <form id="search-form">
+                   
+                <!-- <input id="search-input" class="username-input p-2 pl-3" onchange="addTxt()" onclick="changeText()" placeholder="launching soon ......"> -->
+                 <p id="creator-error1" class="error-text" style="display: none; color:red; text-align:center">No such Creator!! Type correct Creator name</p>
+                <ul class="drop" id="dropUl"></ul>
+                <!-- <div class="d-flex justify-content-center">
+                    <button type="submit" class="username-button p-2 mt-4" id="search" style="width: 200px;">Search</button>              
+                </div> -->
+                </form>
+            </div>
+        </div>
+        <footer class="home-footer p-3 d-flex">
+            <div class="d-flex bd-highlight" style="width: 100%;">
+                <div class="p-2 w-100 bd-highlight">
+                     <div class="footer-div mt-2 ml-2">
+                        <p style="margin-bottom: 0; color:white;">
+                            <a href="https://stargram.in/terms" style="color: white;" target="_blank" rel="noopener noreferrer">
+                            Terms & Privacy</a>
+                        </p>
+                        <p style="color: white;">
+                            <a href="https://wa.me/+919778130583?text=I'm%20interested%20to%20know%20about%20GetMyTime" style="color: white;" target="_blank" rel="noopener noreferrer">
+                            Contact Us</a>
+                        </p>
+                    </div>
+                    <div class="ml-2">
+                        <span class="footer-subtitle" style="color: #BAC8C8;">Stargram Entertainments Pvt Ltd</span>
+                    </div>
+                </div>
+                <div class="flex-shrink-1 bd-highlight d-flex justify-content-center" style="width: 300px !important;">
+                    <div class="d-flex justify-content-end" style="margin-left: 0;margin-right:0;">
+                    <a href="/creator/requestForm" class="signup-button ml-auto my-auto pl-4 p-2 pr-4"
+                        style="color: white;font-family: euclid-medium;">Creator Signup</a>
+                    </div>
+                </div>
+            </div>
+
+        </footer>
+        <!-- {{!-- <input type="text" id="home-text"> --}} -->
+    </div>
+
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+  </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script>
+      function addTxt() {
+          $.ajax({
+              url:"/addSearch",
+              data:{
+                  search:document.getElementById("search-input").value
+              },
+              method:"POST",
+              success:(response) => {
+                  console.log("database added")
+              }
+          })
+      }
+      function changeText() {
+          console.log("hhs")
+           document.getElementById("creator-error1").style.display = 'none'
+           document.getElementById("dropUl").style.display = 'block'
+      }
+      let search
+      $("#search-form").on("submit",(e) => {
+          e.preventDefault();
+           search = document.getElementById("search-input").value
+          if(search === null || search ===""){
+        document.getElementById("creator-error1").style.display = 'none'
+          }
+          else{
+              $.ajax({
+                  method:"POST",
+                  data:{
+                      source:"checkCreator",
+                      creator:search
+                  },
+                  url:"/creator/checkIfCreator",
+                  success:(response) => {
+                      if(response.status) {
+                         window.location.href = '/'+search   
+                          document.getElementById("creator-error1").style.display = 'none'
+                      }
+                      else{
+                        document.getElementById("creator-error1").style.display ='block'
+                          console.log("no creator")
+
+                      }
+                  }
+
+
+              })
+              
+              
+          }
+      })
+
+    var word = [];
+    $.ajax({
+     type: "GET",
+     url: '/creator/getAllCreators',
+     success: function(response){
+        console.log(response);
+        words = response;
+        }
+    });
+
+    const containerEl = document.querySelector('.container')
+    const formEl = document.querySelector('#search-input')
+    const dropEl = document.querySelector('.drop')
+
+    const formHandler = (e) => {
+    const userInput = e.target.value.toLowerCase()
+
+    if(userInput.length === 0) {
+        dropEl.style.height = 0
+        return dropEl.innerHTML = ''              
+    }
+
+    const filteredWords = words.filter(word => word.toLowerCase().includes(userInput)).sort().splice(0, 5)
+    
+    dropEl.innerHTML = ''
+    filteredWords.forEach(item => {
+        const listEl = document.createElement('li')
+        listEl.classList.add("userSelect")
+        listEl.onclick = function(){
+            var username = this.innerHTML
+            document.getElementById("search-input").value = username;
+            document.getElementById("search-input").focus();
+            document.getElementById("dropUl").style.display = "none";
+        }
+        listEl.textContent = item
+        if(item === userInput) {
+            listEl.classList.add('match')
+        }
+        dropEl.appendChild(listEl)
+    })
+
+    if(dropEl.children[0] === undefined) {
+        return dropEl.style.height = 0
+    }
+
+    let totalChildrenHeight = dropEl.children[0].offsetHeight * filteredWords.length
+    dropEl.style.height = totalChildrenHeight + 'px'
+
+}
+
+formEl.addEventListener('input', formHandler)
+
+$(function() {
+  $(".userSelect").on("click",function() {
+    console.log("this")
+  });
+});
+
+  </script>
+</body>
+
+</html>
